@@ -54,6 +54,10 @@ Siga as etapas da ficha de atividade prática:
 4. **Criar o Observer.** Escreva a interface `OuvinteMatricula`, com `aoMatricular(Matricula)`, e a classe `PublicadorMatricula`, com `registrar`, `remover` e `publicar`. Converta as quatro reações em ouvintes. O laço de `publicar` deve percorrer uma **cópia** da lista e **proteger** a chamada de cada ouvinte, de modo que a falha do aviso à coordenação não impeça a auditoria.
 5. **Provar que funciona.** Acrescente uma quinta reação — a estatística de ocupação do curso — sem alterar uma única linha da `FachadaMatricula`.
 
+## Etapa 1 - Localização da divergência
+
+A divergência está entre o método `calcularValor` em `Matricula.java` e o método `calcularValorDoBoleto` em `GeradorBoleto.java`. Em ambas as classes, esses métodos calculam duas condições iguais, a condição de retornar desconto de 50% (R$400) em aluno bolsista e desconto de 20% (R$640) caso seja servidor. Mesmo que esteja duplicado, o `GeradorBoleto.java` não aplica desconto para aluno egresso como em `Matricula.java`, isso resulta de que a Ana Pereira foi cobrada 720 na matrícula mas na hora de pagar o boleto o valor vem cheio como 800 reais. Faltou implementar o `valorBase * 0.90` para dar certo. Isso acontece porque quando criaram a política de egresso, só atualizaram uma das cópias.
+
 ## Critério de sucesso
 
 Ao final, verifique que: (a) Ana Pereira paga **o mesmo valor** na matrícula e no boleto; (b) cada percentual de desconto aparece em **um único lugar** do projeto; (c) a palavra `if` não aparece em nenhuma regra de desconto; (d) a quinta reação custou **uma classe nova e uma linha de registro**, sem tocar na fachada; e (e) com o aviso à coordenação falhando, a **auditoria continua acontecendo**.
