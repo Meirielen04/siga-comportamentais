@@ -1,8 +1,9 @@
 package siga;
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("=== SIGA - Aula 12: Strategy e Observer (codigo inicial) ===");
+        System.out.println("=== SIGA - Aula 12: Strategy e Observer ===");
 
         Aluno bolsista = new Aluno("2024001", "Maria Silva");
         bolsista.setBolsista(true);
@@ -42,18 +43,15 @@ public class Main {
         publicador.registrar(new NotificadorEmail());
         publicador.registrar(new PainelVagas());
         publicador.registrar(new AvisoCoordenacao());
-
         publicador.registrar(new RegistroAuditoria());
+        publicador.registrar(new EstatisticaOcupacao());
 
         FachadaMatricula fachada = new FachadaMatricula(publicador);
         fachada.matricular(bolsista, "DSM-2A", false, politicaBolsista);
         System.out.println();
-        System.out.println(" Agora com a turma lotada, e o aviso a coordenação falhando:");
+        System.out.println("   Agora com a turma lotada, e o aviso a coordenação falhando:");
         fachada.matricular(egresso, "DSM-2B", true, politicaEgresso);
         System.out.println("   >> CORRIGIDO: a falha do aviso foi isolada pelo publicador,");
-        System.out.println("   e a auditoria aconteceu mesmo assim.");
-
-        System.out.println();
-        System.out.println("Sua tarefa: ver o README.md e a ficha de atividade pratica.");
+        System.out.println("      e a auditoria aconteceu mesmo assim.");
     }
 }

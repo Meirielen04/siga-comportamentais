@@ -1,9 +1,9 @@
 package siga;
 
 /** Reação à matrícula. Pronta. */
-public class PainelVagas implements OuvinteMatricula{
+public class PainelVagas implements OuvinteMatricula {
 
-    @Override 
+    @Override
     public void aoMatricular(Matricula matricula) {
         atualizar(matricula.getCodigoTurma());
     }

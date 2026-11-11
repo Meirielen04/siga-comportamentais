@@ -3,7 +3,7 @@ package siga;
 /** Reação à matrícula. Pronta. Falha de propósito, para a etapa 4. */
 public class AvisoCoordenacao implements OuvinteMatricula {
 
-    @Override 
+    @Override
     public void aoMatricular(Matricula matricula) {
         if (matricula.isTurmaLotada()) {
             enviar(matricula.getCodigoTurma());

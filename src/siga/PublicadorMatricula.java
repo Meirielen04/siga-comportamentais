@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PublicadorMatricula {
-    
+
     private final List<OuvinteMatricula> ouvintes = new ArrayList<>();
 
     public void registrar(OuvinteMatricula ouvinte) {
@@ -20,8 +20,8 @@ public class PublicadorMatricula {
             try {
                 ouvinte.aoMatricular(matricula);
             } catch (RuntimeException e) {
-                System.out.println("   [erro] " + ouvinte.getClass().getSimpleName() 
-                            + ": " + e.getMessage());
+                System.out.println("   [erro] " + ouvinte.getClass().getSimpleName()
+                        + ": " + e.getMessage());
             }
         }
     }
