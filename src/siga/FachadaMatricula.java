@@ -24,8 +24,8 @@ public class FachadaMatricula {
     private final RegistroAuditoria registroAuditoria = new RegistroAuditoria();
     private final AvisoCoordenacao avisoCoordenacao = new AvisoCoordenacao();
 
-    public Matricula matricular(Aluno aluno, String codigoTurma, boolean turmaLotada) {
-        Matricula nova = new Matricula(aluno, codigoTurma);
+    public Matricula matricular(Aluno aluno, String codigoTurma, boolean turmaLotada, PoliticaDesconto politica) {
+        Matricula nova = new Matricula(aluno, codigoTurma, politica);
         armazem.add(nova);
 
         notificadorEmail.enviarConfirmacao(nova);
