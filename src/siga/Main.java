@@ -1,9 +1,4 @@
 package siga;
-
-/**
- * Demonstra os dois deslizes acontecendo. Execute e observe a saída:
- * é dela que partem as etapas da ficha de atividade prática.
- */
 public class Main {
 
     public static void main(String[] args) {
@@ -41,20 +36,22 @@ public class Main {
         System.out.println("      então Ana Pereira paga R$720,00 nos dois");
 
         System.out.println();
-        System.out.println("2) Reacoes a matricula, todas dentro da fachada");
-        FachadaMatricula fachada = new FachadaMatricula();
-        fachada.matricular(bolsista, "DSM-2A", false, politicaBolsista);
+        System.out.println("2) Reacoes a matricula, via publicador (Observer)");
 
+        PublicadorMatricula publicador = new PublicadorMatricula();
+        publicador.registrar(new NotificadorEmail());
+        publicador.registrar(new PainelVagas());
+        publicador.registrar(new AvisoCoordenacao());
+
+        publicador.registrar(new RegistroAuditoria());
+
+        FachadaMatricula fachada = new FachadaMatricula(publicador);
+        fachada.matricular(bolsista, "DSM-2A", false, politicaBolsista);
         System.out.println();
-        System.out.println("   Agora com a turma lotada, e o aviso a coordenacao falhando:");
-        try {
-            fachada.matricular(egresso, "DSM-2B", true, politicaEgresso);
-        } catch (IllegalStateException e) {
-            System.out.println("   [erro] " + e.getMessage());
-        }
-        System.out.println("   >> DESLIZE 2: a falha de UMA reacao impediu a auditoria,");
-        System.out.println("      que vinha depois dela. E a quinta reacao sera a quinta");
-        System.out.println("      alteracao nesta mesma classe.");
+        System.out.println(" Agora com a turma lotada, e o aviso a coordenação falhando:");
+        fachada.matricular(egresso, "DSM-2B", true, politicaEgresso);
+        System.out.println("   >> CORRIGIDO: a falha do aviso foi isolada pelo publicador,");
+        System.out.println("   e a auditoria aconteceu mesmo assim.");
 
         System.out.println();
         System.out.println("Sua tarefa: ver o README.md e a ficha de atividade pratica.");
